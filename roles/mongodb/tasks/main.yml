@@ -21,13 +21,13 @@
     #     state: present
     - name: Импортировать публичный GPG ключ MongoDB
       apt_key:
-        url: https://www.mongodb.org/static/pgp/server-4.2.asc
+        url: https://www.mongodb.org/static/pgp/server-6.0.asc
         state: present
 
     - name: Добавить репозиторий MongoDB
       apt_repository:
-        filename: 'mongodb-org-4.2.list'
-        repo: 'deb https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release | lower }}/mongodb-org/4.2 multiverse'
+        filename: 'mongodb-org-6.0.list'
+        repo: 'deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse'
         state: present
         update_cache: yes
 
@@ -48,10 +48,16 @@
       ansible.builtin.apt:
         update_cache: yes
 
-    - name: Установить пакет mongodb-org
+    # - name: Установить пакет mongodb-org
+    #   ansible.builtin.apt:
+    #     name: mongodb-org
+    #     state: latest
+    - name: Install MongoDB
       ansible.builtin.apt:
-        name: mongodb-org
-        state: latest
+          name: mongodb-org
+          state: present
+          update_cache: yes
+
 
     - name: Запустить и включить сервис mongod
       ansible.builtin.service:
