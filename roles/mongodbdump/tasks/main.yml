@@ -2,10 +2,7 @@
 # tasks file for mysqldump
 #------------------------------------------------s7
 ---
-- name: Создать базу данных expom и коллекцию colltab в MongoDB
-  hosts: ubuntu_servers
-  become: yes
-  tasks:
+
     - name: Создать базу данных и коллекцию в MongoDB
       shell: >
         mongo --eval "use {{ db_name }}; db.createCollection({{ collection_name }});"
