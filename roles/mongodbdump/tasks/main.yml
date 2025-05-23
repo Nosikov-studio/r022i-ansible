@@ -27,8 +27,8 @@
     #       }    
 - name: Создать базу expom и коллекцию colltab
   community.mongodb.mongodb_shell:
-    login_host: localhost
-    login_port: 27017
+    # login_host: 85.28.47.165
+    # login_port: 27017
     eval: |
       db = db.getSiblingDB('expom');
       if (db.getCollectionNames().indexOf('colltab') === -1) {
