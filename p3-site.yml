@@ -7,7 +7,7 @@
     - test-role
     - nodejs
     - mongodb
-    - mongodbdump
+    - mongodbcreat
     - nginxdefault    
   #  - phpinstall
   #  - test-php
