@@ -21,7 +21,7 @@
         login_host: localhost
         login_port: 27017
         eval: |
-          db = db.getSiblingDB({{ db_name }});
-          if (db.getCollectionNames().indexOf({{ collection_name }}) === -1) {
-            db.createCollection({{ collection_name }});
+          db = db.getSiblingDB('expom');
+          if (db.getCollectionNames().indexOf('colltab') === -1) {
+            db.createCollection('colltab');
           }    
