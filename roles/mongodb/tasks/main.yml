@@ -1,17 +1,48 @@
 
 #------------------------------------------------s6
 ---
+    - name: Установить необходимые утилиты для работы с репозиториями
+      apt:
+        name:
+          - python3-software-properties
+          - apt-transport-https
+        state: present
+        update_cache: yes
 
-    - name: Импортировать публичный ключ MongoDB
-      ansible.builtin.apt_key:
-        keyserver: hkp://keyserver.ubuntu.com:80
-        id: 7F0CEB10
+    # - name: Импортировать публичный ключ MongoDB
+    #   ansible.builtin.apt_key:
+    #     keyserver: hkp://keyserver.ubuntu.com:80
+    #     id: 7F0CEB10
+    #     state: present
+
+    # - name: Добавить репозиторий MongoDB
+    #   ansible.builtin.apt_repository:
+    #     repo: 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
+    #     state: present
+    - name: Импортировать публичный GPG ключ MongoDB
+      apt_key:
+        url: https://www.mongodb.org/static/pgp/server-4.2.asc
         state: present
 
     - name: Добавить репозиторий MongoDB
-      ansible.builtin.apt_repository:
-        repo: 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen'
+      apt_repository:
+        filename: 'mongodb-org-4.2.list'
+        repo: 'deb https://repo.mongodb.org/apt/ubuntu {{ ansible_distribution_release | lower }}/mongodb-org/4.2 multiverse'
         state: present
+        update_cache: yes
+
+    - name: Установить пакет mongodb-org
+      apt:
+        name: mongodb-org
+        state: present
+        update_cache: yes
+
+    - name: Запустить и включить службу mongod
+      service:
+        name: mongod
+        state: started
+        enabled: yes
+
 
     - name: Обновить кеш пакетов
       ansible.builtin.apt:
