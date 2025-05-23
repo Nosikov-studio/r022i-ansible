@@ -16,12 +16,21 @@
     #   args:
     #     warn: false
 
-    - name: Создать базу expom и коллекцию colltab
-      community.mongodb.mongodb_shell:
-        login_host: localhost
-        login_port: 27017
-        eval: |
-          db = db.getSiblingDB('expom');
-          if (db.getCollectionNames().indexOf('colltab') === -1) {
-            db.createCollection('colltab');
-          }    
+    # - name: Создать базу expom и коллекцию colltab
+    #   community.mongodb.mongodb_shell:
+    #     login_host: localhost
+    #     login_port: 27017
+    #     eval: |
+    #       db = db.getSiblingDB('expom');
+    #       if (db.getCollectionNames().indexOf('colltab') === -1) {
+    #         db.createCollection('colltab');
+    #       }    
+- name: Создать базу expom и коллекцию colltab
+  community.mongodb.mongodb_shell:
+    login_host: localhost
+    login_port: 27017
+    eval: |
+      db = db.getSiblingDB('expom');
+      if (db.getCollectionNames().indexOf('colltab') === -1) {
+        db.createCollection('colltab');
+      }
