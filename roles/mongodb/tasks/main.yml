@@ -31,17 +31,17 @@
         state: present
         update_cache: yes
 
-    - name: Установить пакет mongodb-org
-      apt:
-        name: mongodb-org
-        state: present
-        update_cache: yes
+    # - name: Установить пакет mongodb-org
+    #   apt:
+    #     name: mongodb-org
+    #     state: present
+    #     update_cache: yes
 
-    - name: Запустить и включить службу mongod
-      service:
-        name: mongod
-        state: started
-        enabled: yes
+    # - name: Запустить и включить службу mongod
+    #   service:
+    #     name: mongod
+    #     state: started
+    #     enabled: yes
 
 
     - name: Обновить кеш пакетов
