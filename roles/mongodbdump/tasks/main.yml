@@ -44,6 +44,14 @@
 #       db.createCollection('colltab');
 #     }"
 
-    - name: Создать базу данных и коллекцию в MongoDB
-      shell: >
-        mongo --eval "use {{ db_name }}; db.createCollection({{ collection_name }});"
+    # - name: Создать базу данных и коллекцию в MongoDB
+    #   shell: >
+    #     mongo --eval "use {{ db_name }}; db.createCollection({{ collection_name }});"
+
+    - name: Создать базу expom и коллекцию colltab через mongosh
+      ansible.builtin.shell: >
+        mongosh --quiet --eval "
+        db = db.getSiblingDB('expom');
+        if (db.getCollectionNames().indexOf('colltab') === -1) {
+          db.createCollection('colltab');
+        }"
